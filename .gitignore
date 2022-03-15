@@ -2,5 +2,5 @@
 *.ipynb
 *.json
 *.pyc
-*.env
+*.html
 .DS_Store
