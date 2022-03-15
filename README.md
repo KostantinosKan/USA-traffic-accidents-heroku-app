@@ -15,4 +15,7 @@ In this repository I will take the results from my previous EDA analysis of USA 
 Guide: https://github.com/indielyt/heroku_dash_gdal_test
 
 ### Results
-
+![alt text](https://github.com/KostantinosKan/USA-traffic-accidents-heroku-app/blob/main/data/map.JPG?raw=true)
+* In the above map we can see the number of accidents per 1k residents on each state of U.S.A.
+* For more results and interactivity check my interactive dashboard on Heroku.
+* dash application link: https://usa-traffic-accidents.herokuapp.com/
