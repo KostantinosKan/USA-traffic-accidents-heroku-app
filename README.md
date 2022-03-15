@@ -1,4 +1,4 @@
-# Exploratory Data Analysis of A Countrywide Traffic Accident Dataset (2016 - 2020) - Interactiva Dashboard
+# Exploratory Data Analysis of A Countrywide Traffic Accident Dataset (2016 - 2020) - Interactive Dashboard
 In this repository I will take the results from my previous EDA analysis of USA traffic accidents, and I will integrate them into a dash application. Then, I will deploy this dash application to Heroku.
 
 ## Code and Resources Used
