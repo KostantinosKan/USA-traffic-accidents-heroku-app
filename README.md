@@ -3,7 +3,7 @@ In this repository I will take the results from my previous EDA analysis of USA 
 
 ## Code and Resources Used
 **Python version:** 3.10.2<br/>
-**Packages:** Dash, Dash-Bootstrap-Components, GeoPandas, Folium, Plotly, Pandas, Numpy, Json.<br/>
+**Packages:** Dash, Dash-Bootstrap-Components, GeoPandas, Folium, Plotly, Pandas, Numpy.<br/>
 
 ### Building the Interactive Dashboard
 * Create plotly graphs using the graph_object library.
