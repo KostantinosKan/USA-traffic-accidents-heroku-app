@@ -1,0 +1,6 @@
+# *.csv
+*.ipynb
+*.json
+*.pyc
+*.env
+.DS_Store
