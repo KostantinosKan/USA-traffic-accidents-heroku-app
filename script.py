@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import folium
 import dash
+import json
 import os
 
 
@@ -31,7 +32,7 @@ accidents_df["merge_severity"] = accidents_df["Severity"].replace({1: 2})
 ## per Hour Graphs
 
 # per Hour Barplot
-def per_hour_barplot(df=accidents_df, width=900, height=500):
+def per_hour_barplot(df=accidents_df):
        
        # Amount of accidents per hour of the day and by level of severity
        acdnts_per_Hour_2 = df.loc[(df["merge_severity"] == 2)].groupby(by=["Start_Hour"]).count()["ID"]
@@ -68,22 +69,22 @@ def per_hour_barplot(df=accidents_df, width=900, height=500):
                            font={"size": 16}, 
                            legend={
                                    "traceorder": "reversed",
-                                   "x": 0.861,
+                                   "yanchor": "top",
                                    "y": 0.99,
+                                   "xanchor": "right",
+                                   "x": 0.994,
                                    "bgcolor": "#AAD3DF",
                                    "bordercolor": "#0f2537",
                                    "borderwidth": 2,
                                   },
                            legend_title_text="Severity",
                            legend_font_color="#0f2537",
-                           autosize=False,
-                           width=width,
-                           height=height,
+                           autosize=True,
                            paper_bgcolor="#0f2537",
                            plot_bgcolor="#AAD3DF",
                            margin={
                                    "l": 15,
-                                   "r": 10,
+                                   "r": 0,
                                    "b": 0,
                                    "t": 60
                                   },
@@ -149,9 +150,7 @@ def per_hour_lineplot(df=accidents_df):
                                 "showgrid": False,
                                 "color": "#FF8D00"},
                          font={"size": 16}, 
-                         autosize=False,
-                         width=1250,
-                         height=300,
+                         autosize=True,
                          paper_bgcolor="#0f2537",
                          plot_bgcolor="#AAD3DF",
                          margin={
@@ -167,7 +166,8 @@ def per_hour_lineplot(df=accidents_df):
 ## per Day of the Week Graphs
 
 # per Day of the Week Barplot
-def per_day_barplot(df=accidents_df, width=900, height=500):
+def per_day_barplot(df=accidents_df):
+       
       # Amount of accidents per day of the week and by level of severity
       acdnts_per_Day_2 = df.loc[df["merge_severity"] == 2].groupby(by=["Start_Day_Week"]).count()["ID"]
       acdnts_per_Day_3 = df.loc[df["merge_severity"] == 3].groupby(by=["Start_Day_Week"]).count()["ID"]
@@ -210,8 +210,10 @@ def per_day_barplot(df=accidents_df, width=900, height=500):
                                "color": "#FF8D00"},
                         legend={
                                 "traceorder": "reversed",
-                                "x": 0.861,
+                                "yanchor": "top",
                                 "y": 0.99,
+                                "xanchor": "right",
+                                "x": 0.994,
                                 "bgcolor": "#AAD3DF",
                                 "bordercolor": "#0f2537",
                                 "borderwidth": 2,
@@ -219,9 +221,7 @@ def per_day_barplot(df=accidents_df, width=900, height=500):
                         font={"size": 16}, 
                         legend_title_text="Severity",
                         legend_font_color="#0f2537",
-                        autosize=False,
-                        width=width,
-                        height=height,
+                        autosize=True,
                         paper_bgcolor="#0f2537",
                         plot_bgcolor="#AAD3DF",
                         margin={
@@ -302,9 +302,7 @@ def per_day_lineplot(df=accidents_df):
                                 "color": "#FF8D00"
                                 },
                          font={"size": 16}, 
-                         autosize=False,
-                         width=1250,
-                         height=300,
+                         autosize=True,
                          paper_bgcolor="#0f2537",
                          plot_bgcolor="#AAD3DF",
                          margin={
@@ -320,7 +318,7 @@ def per_day_lineplot(df=accidents_df):
 ## per Month of the Years 2016-2020
 
 # per Month Barplot
-def per_month_barplot(df=accidents_df, width=900, height=500):
+def per_month_barplot(df=accidents_df):
        
        # Find the amount of accidents per month of the year and by level of severity
        acdnts_per_Month_2 = df.loc[df["merge_severity"] == 2].groupby(by=["Start_Month"]).count()["ID"]
@@ -361,8 +359,10 @@ def per_month_barplot(df=accidents_df, width=900, height=500):
                                 "color": "#FF8D00"},
                          legend={
                                  "traceorder": "reversed",
-                                 "x": 0.0052,
+                                 "yanchor": "top",
                                  "y": 0.99,
+                                 "xanchor": "left",
+                                 "x": 0.005,
                                  "bgcolor": "#AAD3DF",
                                  "bordercolor": "#0f2537",
                                  "borderwidth": 2,
@@ -370,9 +370,7 @@ def per_month_barplot(df=accidents_df, width=900, height=500):
                          font={"size": 16}, 
                          legend_title_text="Severity",
                          legend_font_color="#0f2537",
-                         autosize=False,
-                         width=width,
-                         height=height,
+                         autosize=True,
                          paper_bgcolor="#0f2537",
                          plot_bgcolor="#AAD3DF",
                          margin={
@@ -450,9 +448,7 @@ def per_month_lineplot(df=accidents_df):
                                 "color": "#FF8D00"
                                 },
                          font={"size": 16}, 
-                         autosize=False,
-                         width=1250,
-                         height=300,
+                         autosize=True,
                          paper_bgcolor="#0f2537",
                          plot_bgcolor="#AAD3DF",
                          margin={
@@ -468,7 +464,7 @@ def per_month_lineplot(df=accidents_df):
 ## over the Years 2016-2020
 
 # over the Years Barplot
-def per_year_barplot(df=accidents_df, width=900, height=500):
+def per_year_barplot(df=accidents_df):
        # Amount of accidents per month of the year and by level of severity
        acdnts_per_Year_2 = df.loc[df["merge_severity"] == 2].groupby(by=["Start_Year"]).count()["ID"]
        acdnts_per_Year_3 = df.loc[df["merge_severity"] == 3].groupby(by=["Start_Year"]).count()["ID"]
@@ -507,8 +503,10 @@ def per_year_barplot(df=accidents_df, width=900, height=500):
                                 "color": "#FF8D00"},
                          legend={
                                  "traceorder": "reversed",
-                                 "x": 0.0052,
+                                 "yanchor": "top",
                                  "y": 0.99,
+                                 "xanchor": "left",
+                                 "x": 0.005,
                                  "bgcolor": "#AAD3DF",
                                  "bordercolor": "#0f2537",
                                  "borderwidth": 2,
@@ -516,9 +514,7 @@ def per_year_barplot(df=accidents_df, width=900, height=500):
                          font={"size": 16}, 
                          legend_title_text="Severity",
                          legend_font_color="#0f2537",
-                         autosize=False,
-                         width=width,
-                         height=height,
+                         autosize=True,
                          paper_bgcolor="#0f2537",
                          plot_bgcolor="#AAD3DF",
                          margin={
@@ -594,9 +590,7 @@ def per_year_lineplot(df=accidents_df):
                                 "color": "#FF8D00"
                                 },
                          font={"size": 16}, 
-                         autosize=False,
-                         width=1250,
-                         height=300,
+                         autosize=True,
                          paper_bgcolor="#0f2537",
                          plot_bgcolor="#AAD3DF",
                          margin={
@@ -629,20 +623,14 @@ def total_accidents_indicator(df=accidents_df):
                     )
       
       fig.update_layout(
-                        title={
-                               "text":"Total<br>Accidents", 
-                               "font": {
-                                        "size": 20,
-                                        "color": "#FF8D00"
-                                       },
-                               "xanchor": "center",
-                               "x": 0.5,
-                               "y": 0.8
-                              },
-                        autosize=False,
-                        width=200,
-                        height=200,
+                        autosize=True,
                         paper_bgcolor="#0f2537",
+                        margin={
+                                "l": 0,
+                                "r": 0,
+                                "b": 0,
+                                "t": 0
+                                },
                        ),
       return fig
 
@@ -804,10 +792,12 @@ app.layout = html.Div(children=[
                                                    html.Iframe(
                                                                id="choropleth", 
                                                                srcDoc="" , 
-                                                               width="920",
-                                                               height="439.1",
                                                                style={
                                                                       "backgroundColor": "lightblue",
+                                                                      "marginLeft": "1vw",
+                                                                      "marginRight": "0.5vw",
+                                                                      "width": "47.5vw",
+                                                                      "height": "46vh",
                                                                      }
                                                               ),
                                                    ],
@@ -815,34 +805,28 @@ app.layout = html.Div(children=[
                                                 "display": "inline-block",
                                                 }
                                         ),
-                                html.Div(children=[
-                                                   dcc.Graph(
-                                                             id="barplot", 
-                                                             figure={}, 
-                                                             style={
-                                                                    "backgroundColor": "lightblue",
-                                                                    "display": "inline-block",
-                                                                    "marginLeft": "5px",
-                                                                   }
-                                                            ),
-                                                  ],
-                                         style={
-                                                "display": "inline-block",
+                                dcc.Graph(
+                                          id="barplot", 
+                                          figure={}, 
+                                          style={
+                                                 "backgroundColor": "lightblue",
+                                                 "display": "inline-block",
+                                                 "marginRight": "0",
+                                                 "marginLeft": "0.5%",
+                                                 "width": "49%",
+                                                 "height:": "50%"
+                                                 }
+                                          ),
+                                html.H5(
+                                        children="Time Reference",
+                                        style={
+                                               "position": "absolute",
+                                               "right": "3.5%",
+                                               "bottom": "22%",
+                                               "fontSize": "22px",
+                                               "color": "#FF8D00"
                                                }
                                         ),
-                                html.Div(children=[
-                                                   html.H5(
-                                                          children="Time Reference",
-                                                          style={
-                                                                 "position": "absolute",
-                                                                 "right": "4.9%",
-                                                                 "bottom": "210px",
-                                                                 "fontSize": "22px",
-                                                                 "color": "#FF8D00"
-                                                                 }
-                                                          )
-                                                  ]
-                                        ),         
                                 dcc.RadioItems(
                                                id="radio-items-b",
                                                options=[
@@ -862,34 +846,42 @@ app.layout = html.Div(children=[
                                                            },
                                                style={
                                                       "position": "absolute",
-                                                      "right": "6.5%",
+                                                      "right": "5%",
                                                       "bottom": "100px" 
                                                      }
                                               ),
-                                html.Div(children=[
-                                                   dcc.Graph(
-                                                             id="lineplot",
-                                                             figure={},
-                                                            )
-                                                  ],
+                                dcc.Graph(
+                                          id="lineplot",
+                                          figure={},
                                           style={
                                                  "position": "absolute",
-                                                 "left": "300px",
-                                                 "bottom": "10px"
+                                                 "left": "15%",
+                                                 "bottom": "5%",
+                                                 "height": "30%",
+                                                 "width": "70%"
                                                 }
                                         ),
-                                html.Div(children=[
-                                                   dcc.Graph(
-                                                             id="indicator",
-                                                             figure={},
-                                                            )
-                                                  ],
+                                html.H5(
+                                        children="Total Accidents",
+                                        style={
+                                               "position": "absolute",
+                                               "left": "3.8%",
+                                               "bottom": "22%",
+                                               "fontSize": "22px",
+                                               "color": "#FF8D00"
+                                               }
+                                       ),
+                                dcc.Graph(
+                                          id="indicator",
+                                          figure={},
                                           style={
                                                  "position": "absolute",
-                                                 "left": "50px",
-                                                 "bottom": "50px"
+                                                 "left": "2.5%",
+                                                 "bottom": "17%",
+                                                 "height": "5%",
+                                                 "width": "10%"
                                                 }
-                                        )
+                                         )
                                 ]
                      )
 
@@ -935,16 +927,16 @@ def update_graphs(slider_range, radio_choice):
        
        # Create the barplots
        if radio_choice == "per Hour":
-              bar_fig = per_hour_barplot(df=df_updated, width=936, height=500)
+              bar_fig = per_hour_barplot(df=df_updated)
               lin_fig = per_hour_lineplot(df=df_updated)
        elif radio_choice == "per Day":
-              bar_fig = per_day_barplot(df=df_updated, width=936, height=500)
+              bar_fig = per_day_barplot(df=df_updated)
               lin_fig = per_day_lineplot(df=df_updated)
        elif radio_choice == "per Month":
-              bar_fig = per_month_barplot(df=df_updated, width=936, height=500)
+              bar_fig = per_month_barplot(df=df_updated)
               lin_fig = per_month_lineplot(df=df_updated)
        else:  # per Year
-              bar_fig = per_year_barplot(df=df_updated, width=936, height=500)
+              bar_fig = per_year_barplot(df=df_updated)
               lin_fig = per_year_lineplot(df=df_updated)
 
        return go.Figure(bar_fig), go.Figure(lin_fig)
